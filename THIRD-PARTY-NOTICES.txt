@@ -1,0 +1,11 @@
+HUMA BELAJAR bundles:
+
+Supabase JavaScript client 2.99.2
+Source: https://github.com/supabase/supabase-js
+License: MIT. The distributed UMD artifact retains its bundled license notices.
+
+KaTeX 0.16.22
+Source: https://github.com/KaTeX/KaTeX
+License: MIT. See vendor/katex/LICENSE and distributed font notices.
+
+No external font requests or paid image assets are required. Decorative illustrations are CSS.

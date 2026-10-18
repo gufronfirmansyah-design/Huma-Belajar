@@ -1,0 +1,95 @@
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+.auth-form label,
+#account-class,
+#account-file {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+.auth-form input,
+.auth-form select {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px;
+  border: 1px solid #ccdce6;
+  border-radius: 10px;
+  font: inherit;
+  background: white;
+  color: #17334b;
+}
+.auth-form input:focus,
+.auth-form select:focus {
+  outline: 3px solid #afe2e5;
+}
+.auth-form button {
+  margin-top: 8px;
+}
+.login-page .panel {
+  width: min(100%, 520px);
+}
+#account-results input {
+  font: inherit;
+  max-width: 100%;
+  width: 340px;
+  padding: 10px;
+}
+#account-list .lesson-row {
+  flex-wrap: wrap;
+}
+#account-status {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.login-page {
+  min-height: 100vh;
+  height: auto;
+  padding-block: 35px;
+}
+#account-preview-content {
+  max-height: 380px;
+  overflow: auto;
+}
+.auth-form label,
+#account-results .lesson-row > div {
+  min-width: 0;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+#account-results input {
+  width: 100%;
+  box-sizing: border-box;
+}
+#account-class {
+  padding: 12px;
+  border: 1px solid #ccdce6;
+  border-radius: 10px;
+  font: inherit;
+  background: white;
+  margin: 8px 0 20px;
+}
+#account-file {
+  padding: 14px 0;
+}
+#account-file::file-selector-button {
+  border: 1px solid #ccdce6;
+  border-radius: 8px;
+  padding: 10px;
+  background: #eef7f8;
+  color: #17334b;
+  margin-right: 10px;
+}
+@media (max-width: 600px) {
+  .login-page {
+    padding: 24px 20px;
+  }
+  .login-page .panel {
+    padding: 24px;
+  }
+  .login-page h1 {
+    font-size: 28px;
+  }
+}

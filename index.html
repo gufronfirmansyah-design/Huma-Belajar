@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#087f75" />
+    <meta name="description" content="HUMA BELAJAR — ruang bertumbuh, tempat belajar." />
+    <title>HUMA BELAJAR</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./accounts.css" />
+    <script src="./vendor/supabase.js" defer></script>
+    <link rel="stylesheet" href="./vendor/katex/katex.min.css" />
+    <script src="./vendor/katex/katex.min.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <main class="startup">
+        <h1>HUMA BELAJAR</h1>
+        <p>Menyiapkan ruang belajarmu…</p>
+        <p id="local-help" hidden>
+          Untuk menjalankan aplikasi, gunakan JALANKAN-LOKAL.bat. Modul dan login tidak tersedia
+          melalui file lokal langsung.
+        </p>
+      </main>
+    </div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script>
+      if (location.protocol === 'file:') document.getElementById('local-help').hidden = false;
+    </script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
