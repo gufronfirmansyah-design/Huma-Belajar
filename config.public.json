@@ -1,1 +1,6 @@
-{ "appName": "HUMA BELAJAR", "mode": "demo", "supabaseUrl": "", "supabasePublishableKey": "" }
+{
+  "appName": "HUMA BELAJAR",
+  "mode": "production",
+  "supabaseUrl": "https://neoztutzovlmwwywhpno.supabase.co",
+  "supabasePublishableKey": "sb_publishable_nwENfqHvwKDX_nf8MslZEw_6GL7NLHv"
+}
