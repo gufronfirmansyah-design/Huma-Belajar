@@ -1,0 +1,63 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Perbaiki masalah · Panduan HUMA BELAJAR</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f7fa;color:#18334b;font:16px/1.8 system-ui,sans-serif}header{padding:22px max(5%,16px);background:#087f88;color:white}header a{color:white}main{max-width:1050px;margin:auto;padding:24px 16px 60px}article,.welcome{overflow-wrap:anywhere;min-width:0;background:white;padding:clamp(20px,4vw,44px);border-radius:20px}h1{font-size:clamp(25px,4vw,36px);line-height:1.3}h2{color:#087f88;border-top:1px solid #dce7ee;padding-top:24px;margin-top:36px;scroll-margin-top:20px}li{margin:12px 0}a{color:#087f88;overflow-wrap:anywhere}code{background:#eef5fa;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;padding:18px;background:#eef5fa}table{display:block;overflow:auto;border-collapse:collapse;max-width:100%}td,th{border:1px solid #dae7ec;padding:10px;text-align:left}details{padding:18px;background:#e3f2f2;border-radius:12px;margin:20px 0}summary{cursor:pointer;font-weight:700}nav{display:grid;gap:6px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}.card{display:block;background:white;padding:24px;border:1px solid #d4e4e8;border-radius:16px;text-decoration:none}.card strong{display:block;font-size:20px}.card span{color:#52677d}.step{font-size:13px;font-weight:700;color:#087f88}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:#087f88;color:white;border-radius:10px;padding:12px 18px;text-decoration:none}.note{border-left:4px solid #e7ac3a;padding:10px 18px;background:#fff8e9}footer{font-size:14px;color:#567;padding:24px 0}a:focus-visible,summary:focus-visible{outline:3px solid #e4a62e;outline-offset:4px}@media print{header,details,.actions{display:none}main,article{padding:0}body{background:white}h2{break-after:avoid}}</style></head><body><header><b>HUMA BELAJAR · Panduan pemula</b><br><a href="../../panduan.html">← Semua kategori panduan</a></header><main><p class="step">KATEGORI 08 / 08</p><details><summary>Langsung ke langkah tertentu</summary><nav><a href="#langkah-1">Username/password salah</a><a href="#langkah-2">Layanan accounts belum dapat dihubungi / 401 Invalid JWT</a><a href="#langkah-3">Terlalu banyak permintaan</a><a href="#langkah-4">Akun belum siap / username belum dibuat</a><a href="#langkah-5">Wajib ganti password / perubahan lain belum selesai</a><a href="#langkah-6">Kode undangan kelas tidak valid</a><a href="#langkah-7">Database belum siap / profiles tidak ada</a><a href="#langkah-8">Masih MODE DEMO / masih tombol Google</a><a href="#langkah-9">Siswa masuk tetapi mapel kosong</a><a href="#langkah-10">Gambar/PDF privat gagal diunggah</a><a href="#langkah-11">PDF Drive/YouTube tidak tampil</a><a href="#langkah-12">Daftar pengujian layanan nyata sebelum dipakai siswa</a><a href="#langkah-13">Informasi saat meminta bantuan</a></nav></details><article><h1>08 · Memeriksa masalah dan mencoba akun nyata</h1>
+<h2 id="langkah-1">Username/password salah</h2>
+<ol>
+<li>Gunakan username, bukan alamat Google atau email internal.</li>
+<li>Periksa huruf kecil, titik, dan spasi yang tidak sengaja tersalin.</li>
+<li>Coba password terakhir yang diberikan atau yang sudah Anda ubah.</li>
+<li>Jika lupa, hubungi admin pusat melalui sekolah. Admin mereset password melalui menu Akun pengguna.</li>
+<li>Pastikan provider Email di Supabase aktif.</li>
+</ol>
+<h2 id="langkah-2">Layanan accounts belum dapat dihubungi / 401 Invalid JWT</h2>
+<ol>
+<li>Buka Supabase → Edge Functions. Pastikan fungsi bernama <strong>accounts</strong> ada dan deployment berhasil.</li>
+<li>Buka editor fungsi. Harus ada <strong>index.ts</strong> dan <strong>handler.js</strong> dengan isi dari paket versi 1.5.</li>
+<li>Buka Details fungsi dan nonaktifkan <strong>Verify JWT with legacy secret</strong>, lalu simpan. Fungsi memeriksa sendiri token untuk tindakan admin.</li>
+<li>Jalankan Periksa koneksi di website. Jangan menonaktifkan pemeriksaan token dalam kode handler.</li>
+<li>Jika respons 500, periksa Logs untuk pesan pemasangan. Jangan mencetak body formulir, password, atau token ke log.</li>
+</ol>
+<h2 id="langkah-3">Terlalu banyak permintaan</h2>
+<p>Tunggu satu menit sebelum mencoba ulang. Login dibatasi per username dan secara keseluruhan; pendaftaran juga dibatasi agar tidak dipakai membuat akun massal sembarangan. Impor admin dijalankan bertahap. Baris yang gagal tidak dianggap berhasil.</p>
+<h2 id="langkah-4">Akun belum siap / username belum dibuat</h2>
+<p>Akun Google lama belum mempunyai username. Pemilik proyek memindahkan admin pertama, kemudian admin memindahkan akun lain melalui Akun pengguna. Ikuti kategori 02 bagian F. Jangan menghapus user lama.</p>
+<p>Jika halaman berhenti pada error startup, klik Keluar lalu masuk kembali setelah admin memperbaiki akun.</p>
+<h2 id="langkah-5">Wajib ganti password / perubahan lain belum selesai</h2>
+<p>Password sementara harus diganti. Isi password saat ini dan password baru yang berbeda, minimal 12 karakter. Jika perubahan terputus di server, gunakan pemulihan kategori 02 bagian G. Jangan menghilangkan pagar perubahan password hanya dari tampilan.</p>
+<h2 id="langkah-6">Kode undangan kelas tidak valid</h2>
+<p>Periksa sekolah yang dipilih, kode lengkap, dan masa berlaku. Minta kode baru kepada admin. Jangan memasukkan nama kelas sebagai kode. Bila sekolah belum ada, admin pusat harus mendaftarkannya dahulu.</p>
+<h2 id="langkah-7">Database belum siap / profiles tidak ada</h2>
+<p>Jalankan <code>select public.public_status();</code> di SQL Editor. Target <strong>1.5.0</strong>. Jika database kosong gunakan <strong>00-INSTALASI-BARU.sql</strong>. Jika sudah ada data gunakan urutan upgrade pada kategori 01. Jangan menjalankan installer awal pada database lama.</p>
+<h2 id="langkah-8">Masih MODE DEMO / masih tombol Google</h2>
+<ol>
+<li>Salin config.public.json yang diunduh ke 02-KODE-SUMBER.</li>
+<li>Jalankan PERBARUI-WEBSITE.bat.</li>
+<li>Unggah isi 01-WEBSITE-SIAP-UPLOAD ke tempat index.html di GitHub.</li>
+<li>Tunggu deployment sukses, tekan Ctrl+F5. Pastikan nama konfigurasi tidak menjadi config.public (1).json.</li>
+<li>Buka VERSION.txt pada website. Target <strong>1.5.0</strong>.</li>
+</ol>
+<h2 id="langkah-9">Siswa masuk tetapi mapel kosong</h2>
+<p>Periksa keanggotaan siswa, kelas aktif, hubungan mapel-ke-kelas dalam Katalog bersama, dan status terbit mapel/bab/subbab/materi. Akun tanpa kelas tidak otomatis memperoleh semua materi.</p>
+<h2 id="langkah-10">Gambar/PDF privat gagal diunggah</h2>
+<p>Periksa kategori 05: fungsi upload-material terpasang, bucket learning privat, sesi aktif, password sementara sudah diganti, dan guru punya penugasan mapel. Jangan membuat bucket publik untuk mengatasi error.</p>
+<h2 id="langkah-11">PDF Drive/YouTube tidak tampil</h2>
+<p>Klik Buka di tab baru. Periksa izin Drive <strong>Siapa saja yang memiliki link → Pelihat</strong>, link berkas bukan folder, serta video mengizinkan pemutar tertanam. Link Google Slides docs.google.com/presentation belum diterima pembaca Drive saat ini.</p>
+<h2 id="langkah-12">Daftar pengujian layanan nyata sebelum dipakai siswa</h2>
+<p>Pengujian lokal dan layanan tiruan tidak menggantikan daftar ini. Gunakan akun uji dan dua sekolah/kelas uji.</p>
+<ol>
+<li>Buat admin, ganti password sementara, keluar, lalu masuk kembali.</li>
+<li>Daftarkan siswa A dengan kode sekolah A. Kode salah dan kode sekolah lain harus ditolak.</li>
+<li>Daftarkan siswa B di sekolah B. Siswa A tidak dapat melihat hasil privat B, termasuk lewat permintaan langsung.</li>
+<li>Buat satu siswa lewat admin; akun belum bisa membuka data privat sebelum mengganti password.</li>
+<li>Impor Excel dua siswa. Ulangi file: tidak ada akun/keanggotaan ganda.</li>
+<li>Putuskan jaringan saat impor. Baris gagal terlihat; ulangi tanpa menggandakan baris berhasil.</li>
+<li>Reset password siswa. Password lama tidak dapat digunakan untuk login baru, sesi lama tidak dapat membaca data setelah reset diselesaikan dan password baru diaktifkan.</li>
+<li>Coba akun guru tanpa penugasan, kemudian beri satu mapel. Guru hanya mengelola mapel yang diizinkan.</li>
+<li>Coba admin sekolah: hanya laporan sekolahnya, tanpa tombol maupun hak server untuk membuat/reset akun.</li>
+<li>Buka URL berkas privat tanpa izin: harus ditolak. Tautan bertanda tangan yang sudah diterbitkan dapat berlaku sampai masa kedaluwarsanya; bukan pemutusan unduhan instan.</li>
+<li>Coba guest: hanya contoh subbab pertama Bab 1 tiap mapel yang dipilih sebagai contoh publik.</li>
+<li>Coba pada HP dan laptop, termasuk alamat GitHub Pages dalam subfolder.</li>
+<li>Matikan koneksi saat menyimpan formulir: tidak muncul sukses palsu dan isian tetap ada.</li>
+<li>Periksa paket website tidak mengandung secret atau file hasil password.</li>
+</ol>
+<h2 id="langkah-13">Informasi saat meminta bantuan</h2>
+<p>Kirim kategori/langkah dan pesan error. Tutupi nama siswa, password, secret key, dan token pada screenshot. Jangan kirim kredensial. Jangan menghapus database untuk mencoba ulang.</p>
+</article><div class="actions"><a href="../07-GITHUB-DAN-PEMELIHARAAN/index.html">← GitHub dan pemeliharaan</a></div><footer>Aplikasi 1.5.0 · Database 1.5.0 · Panduan diperbarui 18 Oktober 2026.<br>Nama tombol layanan dapat berubah. Panduan tidak berarti akun/database Anda sudah dikonfigurasi.</footer></main></body></html>

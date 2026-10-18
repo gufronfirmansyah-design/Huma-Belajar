@@ -1,0 +1,42 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aktifkan unggahan privat · Panduan HUMA BELAJAR</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f7fa;color:#18334b;font:16px/1.8 system-ui,sans-serif}header{padding:22px max(5%,16px);background:#087f88;color:white}header a{color:white}main{max-width:1050px;margin:auto;padding:24px 16px 60px}article,.welcome{overflow-wrap:anywhere;min-width:0;background:white;padding:clamp(20px,4vw,44px);border-radius:20px}h1{font-size:clamp(25px,4vw,36px);line-height:1.3}h2{color:#087f88;border-top:1px solid #dce7ee;padding-top:24px;margin-top:36px;scroll-margin-top:20px}li{margin:12px 0}a{color:#087f88;overflow-wrap:anywhere}code{background:#eef5fa;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;padding:18px;background:#eef5fa}table{display:block;overflow:auto;border-collapse:collapse;max-width:100%}td,th{border:1px solid #dae7ec;padding:10px;text-align:left}details{padding:18px;background:#e3f2f2;border-radius:12px;margin:20px 0}summary{cursor:pointer;font-weight:700}nav{display:grid;gap:6px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}.card{display:block;background:white;padding:24px;border:1px solid #d4e4e8;border-radius:16px;text-decoration:none}.card strong{display:block;font-size:20px}.card span{color:#52677d}.step{font-size:13px;font-weight:700;color:#087f88}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:#087f88;color:white;border-radius:10px;padding:12px 18px;text-decoration:none}.note{border-left:4px solid #e7ac3a;padding:10px 18px;background:#fff8e9}footer{font-size:14px;color:#567;padding:24px 0}a:focus-visible,summary:focus-visible{outline:3px solid #e4a62e;outline-offset:4px}@media print{header,details,.actions{display:none}main,article{padding:0}body{background:white}h2{break-after:avoid}}</style></head><body><header><b>HUMA BELAJAR · Panduan pemula</b><br><a href="../../panduan.html">← Semua kategori panduan</a></header><main><p class="step">KATEGORI 05 / 08</p><details><summary>Langsung ke langkah tertentu</summary><nav><a href="#langkah-1">A. Memasang kode melalui dashboard</a><a href="#langkah-2">B. Memeriksa tempat penyimpanan</a><a href="#langkah-3">C. Uji dari aplikasi, bukan tombol Test tanpa akun</a><a href="#langkah-4">D. Jika unggahan menghasilkan 401 / Invalid JWT</a></nav></details><article><h1>05 · Mengaktifkan unggahan gambar dan PDF privat</h1>
+<p>Bagian ini diperlukan untuk gambar soal dan berkas privat. Materi Drive publik serta YouTube menggunakan tautan dan tidak memerlukan unggahan ke Supabase.</p>
+<p>Edge Function berarti layanan kecil di server. Nama layanan dalam aplikasi harus tepat <strong>upload-material</strong>.</p>
+<h2 id="langkah-1">A. Memasang kode melalui dashboard</h2>
+<ol>
+<li>Buka Supabase → proyek HUMA BELAJAR → <strong>Edge Functions</strong>.</li>
+<li>Klik <strong>Deploy a new function</strong>. Pilih <strong>Via Editor / Open Editor</strong> bila pilihan metode ditampilkan.</li>
+<li>Gunakan fungsi kosong atau template dasar yang tersedia. Pada editor, buka file <strong>index.ts</strong>.</li>
+<li>Di laptop, buka <code>04-BACKEND/functions/upload-material/index.ts</code> menggunakan Notepad.</li>
+<li>Tekan Ctrl+A lalu Ctrl+C untuk menyalin seluruh kode.</li>
+<li>Kembali ke editor Supabase, klik isi index.ts → Ctrl+A → Ctrl+V untuk mengganti contoh bawaan.</li>
+<li>Isi nama fungsi <strong>upload-material</strong> pada kolom nama/deploy. Jangan memakai spasi atau huruf besar.</li>
+<li>Klik <strong>Deploy function</strong>. Tunggu berhasil. Pastikan daftar fungsi menampilkan nama yang benar.</li>
+</ol>
+<p>Kode ini memakai variabel layanan Supabase di sisi server: SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY. Jangan menyalinnya ke config website. Jika log mengatakan variabel tidak tersedia, periksa konfigurasi lingkungan proyek; jangan mengganti kode dengan rahasia yang ditaruh di GitHub.</p>
+<h2 id="langkah-2">B. Memeriksa tempat penyimpanan</h2>
+<ol>
+<li>Buka menu <strong>Storage</strong>.</li>
+<li>Cari bucket bernama <strong>learning</strong>. Bucket berarti tempat penyimpanan berkas.</li>
+<li>Bucket ini dibuat oleh SQL dan harus <strong>Private</strong>, bukan Public. Jangan membuatnya publik supaya gambar “mudah dibuka”.</li>
+<li>Jika tidak ada, kembali ke kategori 01 dan periksa keberhasilan pemasangan SQL.</li>
+</ol>
+<h2 id="langkah-3">C. Uji dari aplikasi, bukan tombol Test tanpa akun</h2>
+<ol>
+<li>Login website sebagai guru yang ditugaskan pada suatu mapel atau sebagai admin pusat/konten.</li>
+<li>Buka <strong>Kelola → Materi → + Tambah</strong>. Pilih mapel, subbab, judul, serta jenis <strong>Gambar privat</strong>.</li>
+<li>Pilih satu PNG/JPG kecil yang valid, isi teks jika perlu, simpan sebagai draf atau materi uji yang sesuai.</li>
+<li>Setelah diterbitkan pada kelas uji, buka sebagai siswa berhak dan coba tombol membuka berkas.</li>
+<li>Coba akun tanpa izin mapel. Berkas tidak boleh terbuka hanya karena seseorang mengetahui path-nya.</li>
+</ol>
+<h2 id="langkah-4">D. Jika unggahan menghasilkan 401 / Invalid JWT</h2>
+<ol>
+<li>Keluar lalu login ulang untuk memperbarui sesi, coba lagi.</li>
+<li>Buka Edge Functions → <strong>upload-material → Logs / Invocations</strong> dan cocokkan waktu percobaan.</li>
+<li>Jika penolakan terjadi di gateway sebelum kode berjalan, periksa pengaturan fungsi <strong>Verify JWT / Enforce JWT verification</strong>. Pada konfigurasi kunci yang tidak didukung verifikasi gateway lama, layanan ini dapat menggunakan verifikasi pengguna di dalam kode: nonaktifkan pemeriksaan gateway khusus fungsi ini bila memang diperlukan.</li>
+<li><strong>Jangan menghapus pemeriksaan <code>getUser()</code> dan <code>upload_permission</code> dari kode.</strong> Keduanya tetap memeriksa sesi dan hak mapel pada setiap permintaan.</li>
+<li>Uji lagi akun yang sah dan permintaan tanpa login. Jika fungsi tanpa login menerima unggahan, hentikan penggunaan dan periksa pemasangannya.</li>
+</ol>
+<p>Jangan menonaktifkan keamanan tabel atau membuat Storage publik untuk mengatasi error. Batas awal 10 MB per berkas, PDF/JPEG/PNG/WebP; isi berkas diperiksa kembali di server.</p>
+<p>Rujukan pemeriksaan sesi/gateway: <a href="https://supabase.com/docs/guides/functions/auth">Supabase — pengamanan Edge Functions</a>.</p>
+<p>Rujukan: <a href="https://supabase.com/docs/guides/functions/quickstart-dashboard">pemasangan fungsi lewat dashboard Supabase</a>. Nama tombol dapat bergeser; langkah kode mengikuti berkas yang benar-benar disertakan dalam HUMA BELAJAR.</p>
+</article><div class="actions"><a href="../04-ADMIN-DAN-SEKOLAH/index.html">← Admin, sekolah, dan kelas</a><a class="button" href="../06-MATERI-DAN-SOAL/index.html">Lanjut: Isi materi dan bank soal →</a></div><footer>Aplikasi 1.5.0 · Database 1.5.0 · Panduan diperbarui 18 Oktober 2026.<br>Nama tombol layanan dapat berubah. Panduan tidak berarti akun/database Anda sudah dikonfigurasi.</footer></main></body></html>

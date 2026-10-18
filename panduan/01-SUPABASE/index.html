@@ -1,0 +1,52 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Buat database Supabase · Panduan HUMA BELAJAR</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f7fa;color:#18334b;font:16px/1.8 system-ui,sans-serif}header{padding:22px max(5%,16px);background:#087f88;color:white}header a{color:white}main{max-width:1050px;margin:auto;padding:24px 16px 60px}article,.welcome{overflow-wrap:anywhere;min-width:0;background:white;padding:clamp(20px,4vw,44px);border-radius:20px}h1{font-size:clamp(25px,4vw,36px);line-height:1.3}h2{color:#087f88;border-top:1px solid #dce7ee;padding-top:24px;margin-top:36px;scroll-margin-top:20px}li{margin:12px 0}a{color:#087f88;overflow-wrap:anywhere}code{background:#eef5fa;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;padding:18px;background:#eef5fa}table{display:block;overflow:auto;border-collapse:collapse;max-width:100%}td,th{border:1px solid #dae7ec;padding:10px;text-align:left}details{padding:18px;background:#e3f2f2;border-radius:12px;margin:20px 0}summary{cursor:pointer;font-weight:700}nav{display:grid;gap:6px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}.card{display:block;background:white;padding:24px;border:1px solid #d4e4e8;border-radius:16px;text-decoration:none}.card strong{display:block;font-size:20px}.card span{color:#52677d}.step{font-size:13px;font-weight:700;color:#087f88}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:#087f88;color:white;border-radius:10px;padding:12px 18px;text-decoration:none}.note{border-left:4px solid #e7ac3a;padding:10px 18px;background:#fff8e9}footer{font-size:14px;color:#567;padding:24px 0}a:focus-visible,summary:focus-visible{outline:3px solid #e4a62e;outline-offset:4px}@media print{header,details,.actions{display:none}main,article{padding:0}body{background:white}h2{break-after:avoid}}</style></head><body><header><b>HUMA BELAJAR · Panduan pemula</b><br><a href="../../panduan.html">← Semua kategori panduan</a></header><main><p class="step">KATEGORI 01 / 08</p><details><summary>Langsung ke langkah tertentu</summary><nav><a href="#langkah-1">A. Membuat proyek baru</a><a href="#langkah-2">B. Instalasi baru — SATU FILE</a><a href="#langkah-3">C. Upgrade database lama</a><a href="#langkah-4">D. Error profiles tidak ada</a><a href="#langkah-5">E. Yang tidak boleh dipublikasikan</a></nav></details><article><h1>01 · Membuat database Supabase</h1>
+<p>SQL adalah instruksi untuk menyiapkan tabel dan aturan akses database. Salin isi file, bukan nama file. Pilih satu jalur di bawah sesuai kondisi proyek.</p>
+<h2 id="langkah-1">A. Membuat proyek baru</h2>
+<ol>
+<li>Buka <a href="https://supabase.com/dashboard">Supabase Dashboard</a> dan masuk dengan akun pemilik aplikasi. Akun dashboard ini berbeda dari akun siswa.</li>
+<li>Klik <strong>New project</strong>.</li>
+<li>Pilih organisasi Anda. Bila diminta membuat organisasi, ikuti formulir yang tampil.</li>
+<li>Isi <strong>Project name</strong>, misalnya HUMA BELAJAR.</li>
+<li>Buat <strong>Database password</strong> yang kuat dan simpan secara pribadi. Ini bukan password admin aplikasi.</li>
+<li>Pilih region yang tersedia dan sesuai lokasi pengguna. Periksa biaya paket di layar sebelum menyetujui.</li>
+<li>Klik <strong>Create new project</strong>. Tunggu hingga proyek selesai disiapkan.</li>
+<li>Klik nama proyek untuk masuk ke dashboard proyek.</li>
+</ol>
+<h2 id="langkah-2">B. Instalasi baru — SATU FILE</h2>
+<p>Gunakan hanya ketika belum ada tabel public.profiles. Tidak perlu menjalankan file 01 sampai 06 satu per satu.</p>
+<ol>
+<li>Di laptop, buka <strong>04-BACKEND/00-INSTALASI-BARU.sql</strong> dengan Notepad.</li>
+<li>Tekan <strong>Ctrl+A</strong>, lalu <strong>Ctrl+C</strong>.</li>
+<li>Di dashboard Supabase, klik <strong>SQL Editor</strong> pada menu kiri.</li>
+<li>Klik <strong>New query</strong> atau tombol <strong>+</strong> untuk membuka query kosong.</li>
+<li>Klik area editor lalu <strong>Ctrl+V</strong>.</li>
+<li>Pastikan role eksekusi adalah <strong>postgres</strong> (pemilik database), kemudian klik <strong>Run</strong>.</li>
+<li>Tunggu hasil. Yang diharapkan: <strong>Success. No rows returned</strong> atau hasil sukses sejenis.</li>
+<li>Buka query baru dan jalankan: <code>select public.public_status();</code></li>
+<li>Pastikan hasil menyebut <strong>schema_version: 1.5.0</strong>.</li>
+<li>Buka <strong>Table Editor → public</strong>. Pastikan ada profiles, records, schools, account_handles, dan tabel lain.</li>
+</ol>
+<p>Installer berjalan dalam satu transaksi: seluruh pemasangan berhasil bersama, atau dibatalkan jika ada error. Installer menolak menimpa database yang sudah mempunyai profiles.</p>
+<p><strong>Checkpoint:</strong> versi database 1.5.0. Lanjut kategori 02, jangan langsung mencoba login sebelum layanan accounts dipasang.</p>
+<h2 id="langkah-3">C. Upgrade database lama</h2>
+<ol>
+<li>Cadangkan database dan berkas sesuai kategori 07.</li>
+<li>Di SQL Editor, jalankan <code>select public.public_status();</code>.</li>
+<li>Jika sudah <strong>1.4.0</strong>, jalankan hanya <strong>06-upgrade-1.5.sql</strong>.</li>
+<li>Jika <strong>1.3.0</strong>, jalankan <strong>05-upgrade-1.4.sql</strong>, kemudian <strong>06-upgrade-1.5.sql</strong>.</li>
+<li>Jika <strong>1.2.0</strong>, jalankan <strong>04-upgrade-1.3.sql</strong>, <strong>05-upgrade-1.4.sql</strong>, kemudian <strong>06-upgrade-1.5.sql</strong>.</li>
+<li>Jika <strong>1.1.0</strong>, jalankan <strong>02-upgrade-1.1.sql</strong>, <strong>03-upgrade-1.2.sql</strong>, <strong>04-upgrade-1.3.sql</strong>, <strong>05-upgrade-1.4.sql</strong>, lalu <strong>06-upgrade-1.5.sql</strong>, masing-masing tunggu sukses.</li>
+<li>Jika public_status tidak ditemukan tetapi tabel sudah ada, hentikan dulu dan periksa versi/skema. Jangan memaksa installer baru.</li>
+<li>Periksa ulang public_status. Target 1.5.0.</li>
+<li>Akun Google lama memerlukan username. UUID akun, progres, dan penugasan tetap dipertahankan; lihat kategori 02 bagian pemindahan akun lama.</li>
+</ol>
+<h2 id="langkah-4">D. Error profiles tidak ada</h2>
+<p>Pesan <code>relation public.profiles does not exist</code> berarti upgrade dijalankan sebelum tabel dasar tersedia.</p>
+<ol>
+<li>Klik <strong>Table Editor</strong>, pilih schema <strong>public</strong>.</li>
+<li>Bila belum ada tabel aplikasi, jalankan <strong>00-INSTALASI-BARU.sql</strong>.</li>
+<li>Bila sudah ada sebagian tabel tetapi profiles tidak ada, jangan menghapus tabel sembarangan. Salin pesan error dan periksa proyek yang dipilih.</li>
+<li>Untuk benar-benar memulai dari awal, boleh membuat proyek baru yang kosong. Biarkan proyek lama sebagai cadangan sampai hasil baru diperiksa.</li>
+</ol>
+<h2 id="langkah-5">E. Yang tidak boleh dipublikasikan</h2>
+<p>Database password, service_role/secret key, daftar password siswa, dan data pribadi tidak masuk GitHub. Konfigurasi website hanya memakai Project URL dan publishable key/anon key.</p>
+</article><div class="actions"><a href="../00-MULAI/index.html">← Mulai di sini</a><a class="button" href="../02-AKUN-PASSWORD/index.html">Lanjut: Username, password, dan impor akun →</a></div><footer>Aplikasi 1.5.0 · Database 1.5.0 · Panduan diperbarui 18 Oktober 2026.<br>Nama tombol layanan dapat berubah. Panduan tidak berarti akun/database Anda sudah dikonfigurasi.</footer></main></body></html>

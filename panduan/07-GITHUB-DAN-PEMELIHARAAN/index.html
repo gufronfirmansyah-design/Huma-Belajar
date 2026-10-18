@@ -1,0 +1,35 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GitHub dan pemeliharaan · Panduan HUMA BELAJAR</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f7fa;color:#18334b;font:16px/1.8 system-ui,sans-serif}header{padding:22px max(5%,16px);background:#087f88;color:white}header a{color:white}main{max-width:1050px;margin:auto;padding:24px 16px 60px}article,.welcome{overflow-wrap:anywhere;min-width:0;background:white;padding:clamp(20px,4vw,44px);border-radius:20px}h1{font-size:clamp(25px,4vw,36px);line-height:1.3}h2{color:#087f88;border-top:1px solid #dce7ee;padding-top:24px;margin-top:36px;scroll-margin-top:20px}li{margin:12px 0}a{color:#087f88;overflow-wrap:anywhere}code{background:#eef5fa;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;padding:18px;background:#eef5fa}table{display:block;overflow:auto;border-collapse:collapse;max-width:100%}td,th{border:1px solid #dae7ec;padding:10px;text-align:left}details{padding:18px;background:#e3f2f2;border-radius:12px;margin:20px 0}summary{cursor:pointer;font-weight:700}nav{display:grid;gap:6px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}.card{display:block;background:white;padding:24px;border:1px solid #d4e4e8;border-radius:16px;text-decoration:none}.card strong{display:block;font-size:20px}.card span{color:#52677d}.step{font-size:13px;font-weight:700;color:#087f88}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:#087f88;color:white;border-radius:10px;padding:12px 18px;text-decoration:none}.note{border-left:4px solid #e7ac3a;padding:10px 18px;background:#fff8e9}footer{font-size:14px;color:#567;padding:24px 0}a:focus-visible,summary:focus-visible{outline:3px solid #e4a62e;outline-offset:4px}@media print{header,details,.actions{display:none}main,article{padding:0}body{background:white}h2{break-after:avoid}}</style></head><body><header><b>HUMA BELAJAR · Panduan pemula</b><br><a href="../../panduan.html">← Semua kategori panduan</a></header><main><p class="step">KATEGORI 07 / 08</p><details><summary>Langsung ke langkah tertentu</summary><nav><a href="#langkah-1">A. Mengunggah website dari awal</a><a href="#langkah-2">B. Mengubah aplikasi atau hanya menambah konten</a><a href="#langkah-3">C. Cadangan sebelum pembaruan database</a><a href="#langkah-4">D. Jika perlu kembali ke versi lama</a></nav></details><article><h1>07 · GitHub, perubahan, dan cadangan</h1>
+<h2 id="langkah-1">A. Mengunggah website dari awal</h2>
+<ol>
+<li>Simpan salinan repository lama sebelum mengganti isi.</li>
+<li>Buka folder <strong>01-WEBSITE-SIAP-UPLOAD</strong> di laptop.</li>
+<li>Buka repository GitHub → <strong>Code → Add file → Upload files</strong>.</li>
+<li>Seret <strong>seluruh isi</strong> folder siap unggah, termasuk subfolder. Jangan mengunggah ZIP atau folder pembungkus.</li>
+<li>Periksa <code>index.html</code>, <code>config.public.json</code>, folder <code>lib</code>, <code>modules</code>, <code>vendor</code>, dan <code>panduan</code> berada pada tingkat yang benar.</li>
+<li>Klik <strong>Commit changes</strong>.</li>
+<li>Buka <strong>Settings → Pages</strong>. Untuk metode branch, pilih <strong>Deploy from a branch</strong>, pilih branch yang berisi file (misalnya main), pilih <strong>/(root)</strong> jika index.html ada di akar, lalu Save.</li>
+<li>Tunggu penerbitan. Buka alamat website yang ditampilkan halaman Pages; alamat ini berbeda dari alamat repository.</li>
+<li>Muat ulang Ctrl+F5, buka pengaturan/panduan, lalu uji login jika konfigurasi sudah production.</li>
+</ol>
+<p>Jika sebelumnya memakai GitHub Actions, jangan mengganti metode penerbitan tanpa memeriksa workflow yang sudah ada. GitHub Pages perlu dinilai kesesuaiannya sebelum layanan komersial; kompatibilitas file statis tidak berarti semua penggunaan bisnis diizinkan. <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">Ketentuan penggunaan Pages</a>.</p>
+<h2 id="langkah-2">B. Mengubah aplikasi atau hanya menambah konten</h2>
+<ul>
+<li>Menambah soal/materi: melalui aplikasi setelah database terhubung; tidak perlu mengedit GitHub.</li>
+<li>Mengubah fitur/tampilan: edit file terkait di <strong>02-KODE-SUMBER</strong>, lalu jalankan <strong>PERBARUI-WEBSITE.bat</strong>.</li>
+<li>Unggah hasil <strong>01-WEBSITE-SIAP-UPLOAD</strong>, bukan file sumber yang belum diperbarui.</li>
+<li>Jika sudah pernah menandai versi terbit, baca <strong>07-UPDATE-TERAKHIR/BACA-DULU.md</strong> untuk perubahan saja. Jangan menandai sudah diunggah sebelum benar-benar selesai diperiksa.</li>
+<li>Jika BAT gagal karena folder dikunci Windows: tutup penampil ZIP, editor, atau terminal yang sedang memakai folder hasil, lalu coba lagi. Jangan menghapus database atau memaksa hapus folder.</li>
+</ul>
+<h2 id="langkah-3">C. Cadangan sebelum pembaruan database</h2>
+<ol>
+<li>Catat versi website dari VERSION.txt dan versi database dari public_status().</li>
+<li>Simpan paket aplikasi dan config publik yang benar di lokasi cadangan.</li>
+<li>Buka Supabase → pengaturan <strong>Database / Backups</strong> sesuai paket proyek. Periksa cadangan yang benar-benar tersedia, tanggalnya, dan ketentuan pemulihan. Jangan menganggap setiap paket memiliki cadangan otomatis.</li>
+<li>Jika fasilitas cadangan lengkap tidak tersedia, minta bantuan menyiapkan ekspor PostgreSQL lengkap dan uji pemulihan. Ekspor CSV dari Table Editor bukan pengganti cadangan database lengkap.</li>
+<li>Cadangkan berkas Storage dan sumber materi Drive secara terpisah; cadangan database saja tidak menjamin isi file Storage ikut tersimpan.</li>
+<li>Pulihkan dahulu ke proyek uji dan periksa login, relasi kelas, materi, gambar, serta hasil latihan sebelum menyatakan cadangan dapat dipakai.</li>
+</ol>
+<p>Pembaruan yang hanya mengubah panduan/rumus tidak memerlukan SQL baru. Migrasi lama tidak dijalankan ulang hanya karena website diganti.</p>
+<h2 id="langkah-4">D. Jika perlu kembali ke versi lama</h2>
+<p>Hentikan penulisan, cadangkan kondisi terbaru, dan uji pasangan versi website/database yang sesuai. Jangan memulihkan database produksi atau menimpa data siswa hanya untuk mencoba. Data yang masuk setelah cadangan harus diperhitungkan. Paket ini belum menyediakan tombol pemulihan produksi otomatis.</p>
+</article><div class="actions"><a href="../06-MATERI-DAN-SOAL/index.html">← Isi materi dan bank soal</a><a class="button" href="../08-MASALAH-UMUM/index.html">Lanjut: Perbaiki masalah →</a></div><footer>Aplikasi 1.5.0 · Database 1.5.0 · Panduan diperbarui 18 Oktober 2026.<br>Nama tombol layanan dapat berubah. Panduan tidak berarti akun/database Anda sudah dikonfigurasi.</footer></main></body></html>

@@ -1,0 +1,122 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Username, password, dan impor akun · Panduan HUMA BELAJAR</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f7fa;color:#18334b;font:16px/1.8 system-ui,sans-serif}header{padding:22px max(5%,16px);background:#087f88;color:white}header a{color:white}main{max-width:1050px;margin:auto;padding:24px 16px 60px}article,.welcome{overflow-wrap:anywhere;min-width:0;background:white;padding:clamp(20px,4vw,44px);border-radius:20px}h1{font-size:clamp(25px,4vw,36px);line-height:1.3}h2{color:#087f88;border-top:1px solid #dce7ee;padding-top:24px;margin-top:36px;scroll-margin-top:20px}li{margin:12px 0}a{color:#087f88;overflow-wrap:anywhere}code{background:#eef5fa;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{overflow:auto;padding:18px;background:#eef5fa}table{display:block;overflow:auto;border-collapse:collapse;max-width:100%}td,th{border:1px solid #dae7ec;padding:10px;text-align:left}details{padding:18px;background:#e3f2f2;border-radius:12px;margin:20px 0}summary{cursor:pointer;font-weight:700}nav{display:grid;gap:6px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0}.card{display:block;background:white;padding:24px;border:1px solid #d4e4e8;border-radius:16px;text-decoration:none}.card strong{display:block;font-size:20px}.card span{color:#52677d}.step{font-size:13px;font-weight:700;color:#087f88}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}.button{display:inline-block;background:#087f88;color:white;border-radius:10px;padding:12px 18px;text-decoration:none}.note{border-left:4px solid #e7ac3a;padding:10px 18px;background:#fff8e9}footer{font-size:14px;color:#567;padding:24px 0}a:focus-visible,summary:focus-visible{outline:3px solid #e4a62e;outline-offset:4px}@media print{header,details,.actions{display:none}main,article{padding:0}body{background:white}h2{break-after:avoid}}</style></head><body><header><b>HUMA BELAJAR · Panduan pemula</b><br><a href="../../panduan.html">← Semua kategori panduan</a></header><main><p class="step">KATEGORI 02 / 08</p><details><summary>Langsung ke langkah tertentu</summary><nav><a href="#langkah-1">A. Atur layanan login Supabase</a><a href="#langkah-2">B. Pasang fungsi accounts</a><a href="#langkah-3">C. Siswa mendaftar sendiri</a><a href="#langkah-4">D. Admin membuat satu akun</a><a href="#langkah-5">E. Impor banyak siswa dari Excel</a><a href="#langkah-6">F. Lupa password dan pemindahan akun Google</a><a href="#langkah-7">G. Bila perubahan password terputus</a><a href="#langkah-8">Referensi layanan</a></nav></details><article><h1>02 · Username, password, dan impor akun</h1>
+<p>Google Console tidak digunakan pada versi 1.5. Anda tetap masuk ke dashboard Supabase memakai akun pemilik proyek seperti biasa; siswa dan guru masuk di website dengan username.</p>
+<h2 id="langkah-1">A. Atur layanan login Supabase</h2>
+<ol>
+<li>Buka proyek Supabase.</li>
+<li>Klik <strong>Authentication</strong> di menu kiri.</li>
+<li>Buka <strong>Sign In / Providers</strong> (pada tampilan lain bernama <strong>Providers</strong>).</li>
+<li>Buka <strong>Email</strong>, aktifkan <strong>Enable Email provider</strong> / email-password login, lalu <strong>Save</strong>.</li>
+<li>Di pengaturan pendaftaran, matikan <strong>Allow new users to sign up</strong>. Pembuatan akun dilakukan oleh fungsi accounts memakai Admin API, sehingga siswa tetap dapat mendaftar melalui formulir HUMA BELAJAR.</li>
+<li>Matikan <strong>Anonymous sign-ins</strong> jika aktif.</li>
+<li>Buka provider <strong>Google</strong>, nonaktifkan, lalu simpan. OAuth Client ID/Secret tidak diperlukan.</li>
+<li>Jangan menonaktifkan provider Email. Meskipun siswa mengetik username, Supabase Auth tetap memakai identitas email internal di belakang layar.</li>
+</ol>
+<p>Alamat seperti <a href="mailto:username@accounts.huma.invalid">username@accounts.huma.invalid</a> adalah identitas internal, <strong>bukan kotak email</strong>. Tidak ada pengiriman email konfirmasi atau reset ke alamat itu. Pemulihan password melalui admin pusat setelah identitas pemilik diverifikasi.</p>
+<h2 id="langkah-2">B. Pasang fungsi accounts</h2>
+<p>Edge Function adalah layanan kecil di server yang membuat akun dan memeriksa hak admin. File ini tidak diunggah ke GitHub Pages.</p>
+<ol>
+<li>Pada menu kiri proyek, klik <strong>Edge Functions</strong>.</li>
+<li>Klik <strong>Deploy a new function</strong> → <strong>Via Editor</strong> / <strong>Open Editor</strong>.</li>
+<li>Isi nama fungsi tepat <strong>accounts</strong>.</li>
+<li>Pada file <strong>index.ts</strong>, hapus kode contoh.</li>
+<li>Di laptop, buka <strong>04-BACKEND/functions/accounts/index.ts</strong> dengan Notepad, Ctrl+A, Ctrl+C; tempel seluruhnya ke index.ts di dashboard.</li>
+<li>Di daftar file editor, klik <strong>Add file</strong> / tombol <strong>+</strong>, buat file <strong>handler.js</strong> di folder yang sama dengan index.ts.</li>
+<li>Buka <strong>04-BACKEND/functions/accounts/handler.js</strong> di laptop. Salin seluruh isi dan tempel ke handler.js di dashboard.</li>
+<li>Klik <strong>Deploy function</strong> / <strong>Deploy updates</strong>. Tunggu status berhasil.</li>
+<li>Buka halaman fungsi accounts → <strong>Details</strong> / pengaturan fungsi. Cari <strong>Verify JWT with legacy secret</strong>, lalu <strong>nonaktifkan</strong> dan simpan. Formulir daftar/login harus bisa dipanggil sebelum pengguna punya sesi.</li>
+<li>Penonaktifan pemeriksaan gateway bukan pemberian hak admin: fungsi tetap memverifikasi token pengguna sendiri untuk membuat/reset akun, dan hanya admin pusat yang diizinkan.</li>
+<li>Rahasia SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY tersedia sebagai variabel bawaan Edge Functions. Jangan menempelkannya ke HTML atau konfigurasi publik.</li>
+<li>Jika editor belum menyediakan penambahan file, buka editor penuh fungsi. Kedua file harus terlihat berdampingan sebelum deploy; jangan menghapus baris import handler.js.</li>
+</ol>
+<p><strong>Checkpoint:</strong> fungsi accounts terlihat di daftar, deploy berhasil. Kategori 03 menyediakan tombol Periksa koneksi untuk memeriksa respons dasarnya.</p>
+<h2 id="langkah-3">C. Siswa mendaftar sendiri</h2>
+<p>Setelah admin membuat sekolah, kelas, dan kode (kategori 04):</p>
+<ol>
+<li>Siswa membuka alamat website produksi.</li>
+<li>Klik <strong>Belum punya akun? Daftar siswa</strong>.</li>
+<li>Isi <strong>Username</strong>, <strong>Nama lengkap</strong>, pilih <strong>Sekolah</strong>.</li>
+<li>Masukkan <strong>Kode undangan kelas</strong> dari sekolah.</li>
+<li>Isi password minimal <strong>12 karakter</strong>, lalu ulangi.</li>
+<li>Klik <strong>Buat akun siswa</strong>.</li>
+<li>Bila berhasil, siswa masuk ke kelas yang sesuai kode.</li>
+<li>Jika gagal, baca pesan di bawah formulir. Isian tidak dihapus; perbaiki lalu kirim lagi.</li>
+</ol>
+<p>Username unik di seluruh aplikasi, 3–32 karakter, menggunakan huruf kecil, angka, titik, garis bawah atau minus. Karakter pertama huruf/angka. Jangan gunakan dua titik berurutan atau titik di akhir. Awalan sekolah membantu, misalnya sekolahx.andi01. Ini contoh penamaan, bukan akun yang sudah dibuat.</p>
+<p>Pendaftar tidak dapat memilih peran admin/guru. Kode undangan membuka keanggotaan siswa saja.</p>
+<h2 id="langkah-4">D. Admin membuat satu akun</h2>
+<ol>
+<li>Masuk sebagai admin pusat, buka <strong>Akun pengguna</strong>.</li>
+<li>Periksa sekolah aktif di bagian atas.</li>
+<li>Pilih <strong>Kelas tujuan</strong> untuk akun siswa. Untuk calon guru/pengelola pilih <strong>Tanpa kelas</strong>.</li>
+<li>Isi nama dan username, klik <strong>Buat akun</strong>.</li>
+<li>Pada <strong>Hasil pembuatan / reset</strong>, salin password sementara atau klik <strong>Unduh hasil privat (CSV)</strong>.</li>
+<li>Bagikan hanya kepada pemilik akun. Jangan masukkan file hasil ke GitHub.</li>
+<li>Pengguna masuk dan mengganti password sementara dahulu.</li>
+<li>Untuk guru/admin sekolah, lanjutkan pemberian peran dan penugasan pada kategori 04. Membuat akun saja tidak memberi hak pengelola.</li>
+</ol>
+<h2 id="langkah-5">E. Impor banyak siswa dari Excel</h2>
+<ol>
+<li>Buka <strong>Akun pengguna → Unduh template Excel</strong>.</li>
+<li>Buka Template-Akun-Siswa.xlsx di Excel.</li>
+<li>Klik lembar <strong>AKUN</strong>. Baca lembar <strong>PETUNJUK</strong> bila perlu.</li>
+<li>Jangan ubah judul kolom <strong>nama</strong> dan <strong>username</strong>.</li>
+<li>Ganti/hapus baris contoh. Isi satu siswa per baris, maksimal 100 siswa per unggahan.</li>
+<li>Simpan sebagai <strong>Excel Workbook (.xlsx)</strong>, tanpa formula, macro, gambar, atau kolom tambahan.</li>
+<li>Kembali ke aplikasi. Pilih sekolah aktif dan kelas tujuan. Satu file untuk satu kelas.</li>
+<li>Pada <strong>File XLSX</strong>, klik <strong>Choose file / Pilih file</strong> dan pilih template yang sudah diisi.</li>
+<li>Klik <strong>Periksa &amp; pratinjau</strong>. Belum ada akun yang dibuat pada tahap ini.</li>
+<li>Periksa nama, username, dan kelas.</li>
+<li>Klik <strong>Buat akun dari pratinjau</strong>, baca konfirmasi lalu setujui.</li>
+<li>Tunggu setiap baris selesai. Jangan menutup tab.</li>
+<li>Periksa hasil setiap siswa. Username yang sudah ada dilewati dan tidak dipindahkan kelasnya.</li>
+<li>Klik <strong>Unduh hasil privat (CSV)</strong> sebelum menutup halaman. Hasil berisi password sementara; simpan di lokasi pribadi.</li>
+<li>Bagikan password masing-masing secara pribadi. Jangan membagikan seluruh daftar ke grup kelas.</li>
+<li>Klik <strong>Bersihkan hasil dari layar</strong> setelah selesai.</li>
+</ol>
+<p>Jika beberapa baris gagal, tombol yang sama mencoba baris yang belum berhasil. Jika browser terlanjur tertutup, unggah ulang file: akun yang sudah ada dilewati. Password lama tidak ditampilkan lagi; gunakan reset untuk akun yang kehilangan password sementara. Tidak ada penyimpanan daftar password di browser atau tabel aplikasi.</p>
+<p>Batas 100 baris / 2 MB dan pembatasan permintaan adalah batas teknis awal, bukan kuota berbayar. Untuk banyak sekolah, lakukan bertahap dan pantau kapasitas proyek Supabase.</p>
+<h2 id="langkah-6">F. Lupa password dan pemindahan akun Google</h2>
+<p><strong>Reset oleh admin pusat:</strong></p>
+<ol>
+<li>Verifikasi bahwa pemohon benar pemilik akun melalui sekolah.</li>
+<li>Buka <strong>Akun pengguna → Muat daftar akun</strong>.</li>
+<li>Cari nama/username, klik <strong>Reset password</strong>, lalu konfirmasi.</li>
+<li>Bagikan password sementara yang baru secara pribadi.</li>
+<li>Pengguna masuk dan menggantinya. Admin tidak melihat password lama.</li>
+<li>Pengguna yang mengetahui password lamanya bisa membuka <strong>Profil → Ganti password</strong>.</li>
+</ol>
+<p><strong>Akun Google lama:</strong></p>
+<ol>
+<li>Jangan hapus user di Authentication. Penghapusan dapat memutus hubungan progres.</li>
+<li>Setelah admin pusat lama dipindahkan oleh pemilik proyek, buka <strong>Akun pengguna → Muat daftar akun</strong>.</li>
+<li>Akun tanpa username memiliki tombol <strong>Buat username</strong>. Klik, isi username unik, konfirmasi.</li>
+<li>Muat daftar lagi, lalu klik <strong>Reset password</strong> untuk memberikan password sementara.</li>
+<li>UUID, peran, dan progres tetap menggunakan akun yang sama.</li>
+</ol>
+<p><strong>Memindahkan admin pusat lama pertama (oleh pemilik proyek saja):</strong></p>
+<ol>
+<li>Di Authentication → Users, cari email admin pusat lama. Salin <strong>User UID</strong>.</li>
+<li>Pastikan UID tersebut memang admin pusat pada public.profiles (central_admin=true). Jangan memilih berdasarkan nama saja.</li>
+<li>Di SQL Editor jalankan contoh berikut dengan mengganti UUID, bukan email/password:</li>
+</ol>
+<pre><code class="language-sql">insert into public.account_handles(username,user_id,must_change)
+select &#39;adminutama&#39;,id,true from public.profiles
+where id=&#39;GANTI-DENGAN-UUID-ADMIN&#39;::uuid and central_admin and active;
+</code></pre>
+<ol start="4">
+<li>Di Authentication → Users, buka user yang sama, pilih <strong>Update user / Change password</strong>, tetapkan password sementara secara pribadi. Jika dashboard Anda tidak menyediakan ubah password, jangan membuat ulang user; gunakan Admin API melalui lingkungan server milik pemilik proyek.</li>
+<li>Masuk sebagai adminutama, ganti password sementara, lalu pindahkan akun lain lewat aplikasi.</li>
+<li>Jangan menjalankan 07-ADMIN-PERTAMA.sql pada database yang sudah punya admin pusat berbeda.</li>
+</ol>
+<h2 id="langkah-7">G. Bila perubahan password terputus</h2>
+<p>Perubahan password melibatkan layanan Auth dan tabel aplikasi. Jika server berhenti di tengah proses, akun dikunci untuk mencegah status seolah berhasil.</p>
+<ol>
+<li>Coba masuk kembali. Bila muncul “perubahan password lain belum selesai”, hubungi pemilik proyek.</li>
+<li>Pemilik proyek memeriksa UID akun dan memastikan tidak ada permintaan yang masih berjalan.</li>
+<li>Melalui SQL Editor, jalankan <code>update public.account_handles set password_job=null, must_change=true where user_id=&#39;UUID-YANG-BENAR&#39;::uuid;</code>.</li>
+<li>Admin pusat kemudian melakukan <strong>Reset password</strong> lagi. Jangan mengubah must_change menjadi false secara manual.</li>
+<li>Jika akun yang terkunci adalah admin satu-satunya, ubah password melalui dashboard Auth/Admin API, kemudian masuk dan selesaikan ganti password. Simpan pemulihan proyek untuk pemilik yang berwenang.</li>
+</ol>
+<h2 id="langkah-8">Referensi layanan</h2>
+<p><a href="https://supabase.com/docs/guides/auth/passwords">Supabase password authentication</a> dan <a href="https://supabase.com/docs/reference/javascript/auth-admin-createuser">Admin createUser</a>, serta <a href="https://supabase.com/docs/guides/auth/sessions">pemeriksaan sesi</a>. Menu dashboard bisa berubah; selalu pastikan proyek dan nama fungsi benar.</p>
+</article><div class="actions"><a href="../01-SUPABASE/index.html">← Buat database Supabase</a><a class="button" href="../03-HUBUNGKAN-WEBSITE/index.html">Lanjut: Hubungkan website →</a></div><footer>Aplikasi 1.5.0 · Database 1.5.0 · Panduan diperbarui 18 Oktober 2026.<br>Nama tombol layanan dapat berubah. Panduan tidak berarti akun/database Anda sudah dikonfigurasi.</footer></main></body></html>
